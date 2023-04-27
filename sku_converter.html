@@ -2,7 +2,75 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Bynder SKU to Search Converter</title>
+	<title>SKU to Search Converter</title>
+	<style>
+	@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+	body {font-family: 'VT323', monospace;}
+	.pixel2 {
+	  font-size: 25px;
+	  color: white;
+	  height: auto;
+	  margin: 10px;
+	  font-family: 'VT323';
+	  
+	  position: relative;
+	  display: inline-block;
+	  vertical-align: top;
+	  text-transform: uppercase;
+	  
+	  cursor: pointer;
+	  
+	  -webkit-touch-callout: none;
+	  -webkit-user-select: none;
+	  -khtml-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+
+	.pixel2 {
+	  position: relative;
+	  display: block;
+	  margin: 10px;
+	  font-family: 'VT323';
+	  text-transform: uppercase;
+	  
+	  font-size: 25px;
+	  color: white;
+	}
+
+	.pixel2::before {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 10px;
+	  bottom: 10px;
+	  left: -10px;
+	  right: -10px;
+	  background: black;
+	  z-index: -1;
+	}
+
+	.pixel2::after {
+	  content: "";
+	  display: block;
+	  position: absolute;
+	  top: 4px;
+	  bottom: 4px;
+	  left: -6px;
+	  right: -6px;
+	  background: black;
+	  z-index: -1;
+	}
+
+	.pixel2 {
+	  padding: 10px 10px;
+	  position: relative;
+	  background: black;
+	  width: auto;
+	  z-index: 2;
+	}
+	</style>
 	<script>
 		function convertSKUs() {
 			// Get the input text from the text area
@@ -47,12 +115,12 @@
 	</script>
 </head>
 <body>
-	<h1>Bynder SKU to Search Converter</h1>
-	<p>SKUs Liste hier einfügen:</p>
-	<textarea id="input" rows="10" cols="50"></textarea><br>
-	<button onclick="convertSKUs()">Liste erstellen</button><br>
-	<p>Converted SKUs:</p>
-	<textarea id="output" rows="10" cols="50" readonly></textarea>
-	<button id="copy" onclick="copyOutput()">Copy to Clipboard</button>
+	<h1>SKU to Search Converter</h1>
+	<h2>SKU-Liste hier einfügen:</h2>
+	<textarea id="input" rows="10" cols="50"></textarea><br />
+	<button class="pixel2" onclick="convertSKUs()">Liste erstellen</button><br />
+	<h2>Ergebnis:</h2>
+	<textarea id="output" rows="10" cols="50" readonly></textarea><br />
+	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button>
 </body>
 </html>
