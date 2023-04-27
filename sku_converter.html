@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Bynder SKU to Search Converter</title>
+	<script>
+		function convertSKUs() {
+			// Get the input text from the text area
+			var input = document.getElementById("input").value;
+
+			// Split the input text by line breaks into an array of SKUs
+			var skus = input.split("\n");
+
+			// Create an empty array to hold the converted SKUs
+			var convertedSkus = [];
+
+			// Loop through each SKU and add it to the converted array with quotes and "OR" between them
+			for (var i = 0; i < skus.length; i++) {
+				convertedSkus.push('"' + skus[i] + '"');
+			}
+
+			// Join the converted SKUs array with "OR" between them
+			var output = convertedSkus.join("OR");
+
+			// Set the output text area to the converted SKUs
+			document.getElementById("output").value = output;
+		}
+		function copyOutput() {
+			// Get the output text from the text area
+			var output = document.getElementById("output").value;
+
+			// Create a temporary text area to copy the output text to
+			var tempTextArea = document.createElement("textarea");
+			tempTextArea.value = output;
+			document.body.appendChild(tempTextArea);
+
+			// Copy the output text to the clipboard
+			tempTextArea.select();
+			document.execCommand("copy");
+
+			// Remove the temporary text area
+			document.body.removeChild(tempTextArea);
+
+			// Disable the copy button
+			document.getElementById("copy").disabled = true;
+		}
+	</script>
+</head>
+<body>
+	<h1>Bynder SKU to Search Converter</h1>
+	<p>SKUs Liste hier einfügen:</p>
+	<textarea id="input" rows="10" cols="50"></textarea><br>
+	<button onclick="convertSKUs()">Liste erstellen</button><br>
+	<p>Converted SKUs:</p>
+	<textarea id="output" rows="10" cols="50" readonly></textarea>
+	<button id="copy" onclick="copyOutput()">Copy to Clipboard</button>
+</body>
+</html>
