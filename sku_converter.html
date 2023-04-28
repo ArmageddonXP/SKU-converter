@@ -89,23 +89,32 @@
 
 		}
 		function copyOutput() {
-			// Get the output text from the text area
-			var output = document.getElementById("output").value;
+			// Get the text field
+			var copyText = document.getElementById("output");
 
-			// Create a temporary text area to copy the output text to
-			var tempTextArea = document.createElement("textarea");
-			tempTextArea.value = output;
-			document.body.appendChild(tempTextArea);
+			// Select the text field
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); // For mobile devices
 
-			// Copy the output text to the clipboard
-			tempTextArea.select();
-			document.execCommand("copy");
+			// Copy the text inside the text field
+			navigator.clipboard.writeText(copyText.value);
 
-			// Remove the temporary text area
-			document.body.removeChild(tempTextArea);
+			// Alert the copied text
+			alert("Liste wurde kopiert!");
+		}
+		function copyOutput_cleared() {
+			// Get the text field
+			var copyText = document.getElementById("output");
 
-			// Disable the copy button
-			document.getElementById("copy").disabled = true;
+			// Select the text field
+			copyText.select();
+			copyText.setSelectionRange(0, 99999); // For mobile devices
+
+			// Copy the text inside the text field
+			navigator.clipboard.writeText(copyText.value);
+
+			// Alert the copied text
+			alert("Liste wurde kopiert!");
 		}
 	</script>
 </head>
@@ -120,6 +129,6 @@
 	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button><br />
 	<h2>Enthaltene Artikelnummern:</h2>
 	<textarea id="output_cleared" rows="10" cols="50" readonly=""></textarea><br />
-	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button>
+	<button class="pixel2" id="copy" onclick="copyOutput_cleared()">In Zwischenablage kopieren</button>
 </body>
 </html>
