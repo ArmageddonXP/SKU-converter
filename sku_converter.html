@@ -94,14 +94,10 @@
 		}
 		function copyOutput() {
 			// Get the text field
-			var copyText = document.getElementById("output");
-
-			// Select the text field
-			copyText.select();
-			copyText.setSelectionRange(0, 99999); // For mobile devices
-
-			// Copy the text inside the text field
-			navigator.clipboard.writeText(copyText.value);
+			const element = document.querySelector('#output');
+			element.select();
+			element.setSelectionRange(0, 99999);
+			document.execCommand('copy');
 
 			// Alert the copied text
 			var span = document.getElementById("output_copied");
@@ -123,14 +119,10 @@
 		}
 		function copyOutput_cleared() {
 			// Get the text field
-			var copyText = document.getElementById("output_cleared");
-
-			// Select the text field
-			copyText.select();
-			copyText.setSelectionRange(0, 99999); // For mobile devices
-
-			// Copy the text inside the text field
-			navigator.clipboard.writeText(copyText.value);
+			const element = document.querySelector('#output_cleared');
+			element.select();
+			element.setSelectionRange(0, 99999);
+			document.execCommand('copy');
 
 			// Alert the copied text
 			var span = document.getElementById("output_cleared_copied");
