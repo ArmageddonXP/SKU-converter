@@ -70,6 +70,10 @@
 	  width: auto;
 	  z-index: 2;
 	}
+	
+	h3 {
+		color: #f80;
+	}
 	</style>
 	<script>
 		function convertSKUs() {
@@ -100,11 +104,26 @@
 			navigator.clipboard.writeText(copyText.value);
 
 			// Alert the copied text
-			alert("Liste wurde kopiert!");
+			var span = document.getElementById("output_copied");
+			span.innerHTML = "Liste wurde kopiert!";
+			var opacity = 1;
+			span.style.opacity = opacity;
+			
+			setTimeout(function() {
+				
+				var intervalID = setInterval(function() {
+					opacity -= 0.04;
+					span.style.opacity = opacity;
+					if (opacity <= 0) {
+					  clearInterval(intervalID);
+					}
+				}, 50); // 50 milliseconds = interval between opacity changes
+				
+			}, 2000); // 5000 milliseconds = 5 seconds
 		}
 		function copyOutput_cleared() {
 			// Get the text field
-			var copyText = document.getElementById("output");
+			var copyText = document.getElementById("output_cleared");
 
 			// Select the text field
 			copyText.select();
@@ -114,7 +133,21 @@
 			navigator.clipboard.writeText(copyText.value);
 
 			// Alert the copied text
-			alert("Liste wurde kopiert!");
+			var span = document.getElementById("output_cleared_copied");
+			span.innerHTML = "Liste wurde kopiert!";
+			var opacity = 1;
+			span.style.opacity = opacity;
+			setTimeout(function() {
+				
+				var intervalID = setInterval(function() {
+					opacity -= 0.04;
+					span.style.opacity = opacity;
+					if (opacity <= 0) {
+					  clearInterval(intervalID);
+					}
+				}, 50); // 50 milliseconds = interval between opacity changes
+				
+			}, 2000); // 5000 milliseconds = 5 seconds
 		}
 	</script>
 </head>
@@ -126,9 +159,11 @@
 	<button class="pixel2" onclick="convertSKUs()">Liste erstellen</button><br />
 	<h2>Liste für Produktsuche:</h2>
 	<textarea id="output" rows="10" cols="50" readonly=""></textarea><br />
-	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button><br />
+	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button>
+	<h3 id="output_copied"></h3><br />
 	<h2>Enthaltene Artikelnummern:</h2>
 	<textarea id="output_cleared" rows="10" cols="50" readonly=""></textarea><br />
 	<button class="pixel2" id="copy" onclick="copyOutput_cleared()">In Zwischenablage kopieren</button>
+	<h3 id="output_cleared_copied"></h3><br />
 </body>
 </html>
