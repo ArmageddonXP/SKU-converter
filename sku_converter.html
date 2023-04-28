@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
+<!-- saved from url=(0104)http://htmlpreview.github.io/?https://github.com/ArmageddonXP/SKU-converter/blob/main/sku_converter.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="https://raw.githubusercontent.com/ArmageddonXP/SKU-converter/main/sku_converter.html">--><base href=".">
+	
 	<title>SKU to Search Converter</title>
 	<style>
 	@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
@@ -73,25 +73,20 @@
 	</style>
 	<script>
 		function convertSKUs() {
-			// Get the input text from the text area
-			var input = document.getElementById("input").value;
+		
+			const inputTextarea = document.getElementById('input');
+			const outputTextarea = document.getElementById('output');
+			const listTextarea = document.getElementById('output_cleared');
 
-			// Split the input text by line breaks into an array of SKUs
-			var skus = input.split("\n");
+			const regex = /(\w+-)+\w+/g; // matches any sequence of hyphen-connected words
 
-			// Create an empty array to hold the converted SKUs
-			var convertedSkus = [];
+			const inputText = inputTextarea.value;
+			const matches = inputText.match(regex); // extracts matches from the input text
+			const outputText = matches ? matches.map(m => `"${m}"`).join('OR') : ''; // adds double quotes and logical OR between matches
+			outputTextarea.value = outputText; // sets the output textarea's value to the resulting string
+			const listText = matches ? matches.join('\n') : ''; // joins matches on separate lines without quotes or the logical OR operator
+			listTextarea.value = listText; // sets the list textarea's value to the resulting string
 
-			// Loop through each SKU and add it to the converted array with quotes and "OR" between them
-			for (var i = 0; i < skus.length; i++) {
-				convertedSkus.push('"' + skus[i] + '"');
-			}
-
-			// Join the converted SKUs array with "OR" between them
-			var output = convertedSkus.join("OR");
-
-			// Set the output text area to the converted SKUs
-			document.getElementById("output").value = output;
 		}
 		function copyOutput() {
 			// Get the output text from the text area
@@ -117,10 +112,14 @@
 <body>
 	<h1>SKU to Search Converter</h1>
 	<h2>SKU-Liste hier einfügen:</h2>
-	<textarea id="input" rows="10" cols="50"></textarea><br />
+	<p>Hier kann auch Fließtext oder ein Task-Text eingeführt werden,<br />das Script filtert die Artikelnummern heraus und erstellt daraus eine Liste.</p>
+	<textarea id="input" rows="10" cols="50" style="height: 176px; width: 389px;"></textarea><br>
 	<button class="pixel2" onclick="convertSKUs()">Liste erstellen</button><br />
-	<h2>Ergebnis:</h2>
-	<textarea id="output" rows="10" cols="50" readonly></textarea><br />
+	<h2>Liste für Produktsuche:</h2>
+	<textarea id="output" rows="10" cols="50" readonly=""></textarea><br />
+	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button><br />
+	<h2>Enthaltene Artikelnummern:</h2>
+	<textarea id="output_cleared" rows="10" cols="50" readonly=""></textarea><br />
 	<button class="pixel2" id="copy" onclick="copyOutput()">In Zwischenablage kopieren</button>
 </body>
 </html>
